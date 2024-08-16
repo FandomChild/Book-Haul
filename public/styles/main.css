@@ -1,5 +1,3 @@
-
-
 html, body {
     margin:0;
     padding:0;
@@ -33,5 +31,35 @@ html, body {
 }
 
 .posts {
-    background-color: #F1D6AB
- }
+    background-color: #F1D6AB;
+    display: flex;
+    justify-content: center;
+}
+
+.bar input[type=text] {
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+    width: 400px;
+}
+
+.listItem {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.listItem img {
+    margin-right: 10px;
+}
+
+.listItem div {
+    flex-grow: 1;
+}
+
+.listItem:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}

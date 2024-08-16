@@ -13,8 +13,8 @@ app.get("/", (req, res) => {
     res.render("index.ejs");
 });
 
-app.get("/add", (req, res) => {
-    res.render("add.ejs");
+app.get("/search", (req, res) => {
+    res.render("search.ejs");
 });
 
 app.listen(port, () => {
