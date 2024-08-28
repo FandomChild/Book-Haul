@@ -59,15 +59,15 @@ async function fetchData(searchTerm) {
     }
 }
 
-async function updateDropdown(titles, coverIds, bookAuthors, dropdown) {
-    // Clear any existing content in the dropdown
+async function updateDropdown(titles, coverIds, authorName, dropdown) {
     if (titles.length > 0) {
         dropdown.style.display = 'block';
     } else {
         dropdown.style.display = 'none';
     }
-    
+
     console.log('this is titles' + titles)
+    // Clear any existing content in the dropdown
     while (dropdown.firstChild) {
         dropdown.removeChild(dropdown.firstChild);
     }
@@ -75,8 +75,8 @@ async function updateDropdown(titles, coverIds, bookAuthors, dropdown) {
     // Create list titles based on the fetch results
     titles.forEach((item, index) => {
         const a = document.createElement('a');
-        a.href = `/book?title=${item}&author=${bookAuthors[index]}&coverId=${coverIds[index]? coverIds[index]: 0}`;
-        console.log('this is title ' + a.href)
+        a.href = `/review?title=${item}&author=${authorName[index]}&coverId=${coverIds[index]? coverIds[index]: 0}`;
+        console.log('this is title link ' + a.href);
         
         const li = document.createElement('li');
         li.className = 'listItem';
@@ -86,7 +86,6 @@ async function updateDropdown(titles, coverIds, bookAuthors, dropdown) {
         img.width = 40;
         img.height = 60;
         img.alt = 'book picture';
-
         console.log('ths is img src ' + img.src)
         
         const div = document.createElement('div');
@@ -94,13 +93,11 @@ async function updateDropdown(titles, coverIds, bookAuthors, dropdown) {
         const titleP = document.createElement('p');
         const strong = document.createElement('strong');
         strong.textContent = item;
-
-        console.log('this is item name? ' + strong.textContent)
         titleP.appendChild(strong);
-        console.log('this is titleP ' + titleP.strong)
+        console.log('this is titleP ' + titleP.innerHTML)
         
         const authorP = document.createElement('p');
-        authorP.textContent = `By ${bookAuthors[index]}`;
+        authorP.textContent = `By ${authorName[index]}`;
         console.log('this is authorP ' + authorP.textContent)
 
         div.appendChild(titleP);

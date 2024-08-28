@@ -1,0 +1,36 @@
+<%- include("partials/header.ejs") %>
+    <div class="content col-6 col-sm-6 col-md-10 col-lg-10 col-xl-10">
+        <div class="posts my-3 col-6 col-sm-6 col-md-8 col-lg-8 col-xl-8">
+            <form class="review" action="/save" method="POST">
+                <div class="coverDiv mt-3"><img src="https://covers.openlibrary.org/b/id/<%= coverId %>-M.jpg" alt="Cover art of book"></div>
+                <hr class="mt-3 mb-0">
+                <input type="hidden" name="coverId" value="<%= locals.coverId %>">
+                <p class="revForm mt-3 mb-0">Title:</p>
+                <p class="mb-0"><%= locals.title %></p>
+                <input type="hidden" name="title" value="<%= locals.title %>">
+                <p class="revForm mt-3 mb-0">Author:</p>
+                <p class="mb-0"><%= locals.author %></p>
+                <input type="hidden" name="author" value="<%= locals.author %>">
+                <label for="date" class="mt-3 label revForm">Date Completed:</label>
+                <input type="date" class="mt-2" name="date" min="1995-06-16" max=<%= max %> style="width: 52%">
+                <label for="rating" class="mt-3 label revForm">Rating:</label>
+                <div class="mt-2 rating">
+                    <input type="radio" name="rating" class="rating_button" id="new_rate_1" value="1">
+                        <label class="radio_stars" for="rate1">🖤</label>
+                    <input type="radio" name="rating" class="rating_button" id="new_rate_2" value="2">
+                        <label class="radio_stars" for="rate2">🖤</label>
+                    <input type="radio" name="rating" class="rating_button" id="new_rate_3" value="3">
+                        <label class="radio_stars" for="rate3">🖤</label>
+                    <input type="radio" name="rating" class="rating_button" id="new_rate_4" value="4">
+                        <label class="radio_stars" for="rate4">🖤</label>    
+                    <input type="radio" name="rating" class="rating_button" id="new_rate_5" value="5">
+                        <label class="radio_stars" for="rate5">🖤</label>
+                </div>
+                <label for="lname" class="mt-3 label revForm">Review:</label>
+                <textarea name="content" rows="5" class="mt-2"></textarea>
+                <button type="submit" class="rounded my-3">Submit</button>
+              </form>
+        </div>
+    </div>
+</div>
+<%- include("partials/footer.ejs") %>
