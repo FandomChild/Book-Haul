@@ -24,14 +24,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.get("/", async (req, res) => {
-    // try {
-    //     const result = await db.query("SELECT * FROM book JOIN review ON book.id = review.id");
-    //     console.log(result.rows);
-    //     res.render("index.ejs");
-    // } catch(err) {
-    //     console.log(err)
-    // }
-    res.render("index.ejs");
+    try {
+        const result = await db.query("SELECT * FROM book JOIN review ON book.id = review.id");
+        console.log(result.rows);
+        res.render("index.ejs", {
+            data: result.rows
+        });
+    } catch(err) {
+        console.log(err)
+    }
     
 });
 
@@ -54,8 +55,7 @@ app.get("/review", (req, res) => {
 
 app.post("/save", async (req, res) => {
     const data = req.body;
-    console.log(data)
-    
+
     try {
         db.query("BEGIN");
         await db.query("INSERT INTO book (title, author, coverId) VALUES ($1, $2, $3)", [data.title, data.author, data.coverId]);

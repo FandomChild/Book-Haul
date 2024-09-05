@@ -42,7 +42,7 @@ html, body {
     margin-bottom: 5px;
     border: none;
     font-size: 18px;
-    width: 420px;
+    width: 600px;
     border-radius: 5px;
 }
 .listItem {
@@ -85,15 +85,18 @@ html, body {
     display: flex;
     justify-content: center; /* Center the dropdown list horizontally */
 }
+
 form {
-    width: 420px;
+    width: 600px;
 }
+
 .searchbar {
     display: flex;
     justify-content: center;
 }
 
 .review {
+    width: 600px;
     display: flex;
     flex-direction: column;
     text-align: left;
@@ -115,10 +118,14 @@ form {
 .top {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 20px;
 }
 
 .info {
     display: flex;
     flex-direction: column;
 }
+
+::placeholder {
+    text-align: center; 
+ }
