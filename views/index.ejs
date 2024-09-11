@@ -1,5 +1,15 @@
 <%- include("partials/header.ejs") %>
     <div class="content pt-3 col-6 col-sm-6 col-md-10 col-lg-10 col-xl-10">
+      <div>
+          <form action="/sort" method="POST">
+            <select name="order">
+              <option value="date">Date</option>
+              <option value="rating">Rating</option>
+              <option value="title">Title</option>
+            </select>
+            <button class="sort" type="submit">Go</button>
+          </form>
+      </div>
       <% if (locals.data) { %>
         <% for (let i = 0; i < data.length; i++) { %>
             <div class="posts mb-3 col-6 col-sm-6 col-md-8 col-lg-8 col-xl-8">

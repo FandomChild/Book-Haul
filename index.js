@@ -18,6 +18,7 @@ var year = current.getFullYear();
 var month = ('0' + (current.getMonth() + 1)).slice(-2);
 var day = ('0' + current.getDate()).slice(-2);
 var present = year+'-'+month+'-'+day;
+var order = 'date';
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,7 +26,8 @@ app.use(express.static("public"));
 
 app.get("/", async (req, res) => {
     try {
-        const result = await db.query("SELECT * FROM book JOIN review ON book.id = review.id");
+        const result = await db.query(`SELECT * FROM book JOIN review ON book.id = review.id ORDER BY ${order} DESC`);
+        console.log(order)
         console.log(result.rows);
         res.render("index.ejs", {
             data: result.rows
@@ -33,7 +35,11 @@ app.get("/", async (req, res) => {
     } catch(err) {
         console.log(err)
     }
-    
+});
+
+app.post("/sort", (req, res) => {
+    order = req.body.order;
+    res.redirect("/");
 });
 
 app.get("/search", (req, res) => {

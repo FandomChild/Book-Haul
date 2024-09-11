@@ -86,10 +86,6 @@ html, body {
     justify-content: center; /* Center the dropdown list horizontally */
 }
 
-form {
-    width: 600px;
-}
-
 .searchbar {
     display: flex;
     justify-content: center;
@@ -129,3 +125,16 @@ form {
 ::placeholder {
     text-align: center; 
  }
+
+ select {
+    border: 5px solid #F1D6AB;
+    border-radius: 4px;;
+    height: 40px;
+ }
+
+button.sort {
+    border: 5px solid #F1D6AB;
+    background-color: #fff;
+    border-radius: 4px;
+    height: 40px;
+}
