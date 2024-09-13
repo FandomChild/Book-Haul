@@ -84,6 +84,7 @@ app.get("/review", async (req, res) => {
 app.post("/save", async (req, res) => {
     const data = req.body;
     console.log(data)
+    if (!data.date) data.date = present;
     try {
         db.query("BEGIN");
         await db.query("INSERT INTO book (title, author, coverId) VALUES ($1, $2, $3)", [data.title, data.author, data.coverId]);
@@ -108,14 +109,17 @@ app.get("/edit/:id", async (req, res) => {
     });
 });
 
-// app.post("/update", async (req, res) => {
-//     var edit = req.body;
-//     console.log(edit)
-//     try {
-//         await db.query()
-//     }
-//     res.redirect("/")
-// });
+app.post("/update", async (req, res) => {
+    var edit = req.body;
+    if (!edit.date) edit.date = present;
+    console.log(edit)
+    try {
+        await db.query("UPDATE review SET date = $1, rating = $2, review = $3 WHERE id = $4", [edit.date, edit.rating, edit.review, edit.id]);
+        res.redirect("/")
+    } catch (err) {
+        console.log(err)
+    }
+});
 
 app.get("/sources", (req, res) => {
     res.redirect("/");
