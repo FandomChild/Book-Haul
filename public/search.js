@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function () {
             dropdown.style.display = 'none';
         }
     });
-    
 });
 
 async function fetchData(searchTerm) {
@@ -110,3 +109,10 @@ async function updateDropdown(titles, coverIds, authorName, dropdown) {
         dropdown.appendChild(a);
     });
 };
+
+const rank = document.getElementById('rank');
+var set = rank.innerHTML;
+const rating = document.getElementById(`rating-${set}`);
+rating.setAttribute("checked", '')
+console.log(rating.value)
+console.log(set)

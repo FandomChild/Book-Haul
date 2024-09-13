@@ -33,6 +33,9 @@
                 <p class="mt-0">
                   <%= data[i]['review'] %>
                 </p>
+                <div class="mb-3">
+                  <a class="edit text-white text-decoration-none" href="/edit/<%= data[i]['id'] %>">Edit</a>
+                </div>
               </div>  
             </div>
         <% } %>

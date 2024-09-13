@@ -1,39 +1,85 @@
 <%- include("partials/header.ejs") %>
     <div class="content col-6 col-sm-6 col-md-10 col-lg-10 col-xl-10">
         <div class="posts my-3 col-6 col-sm-6 col-md-8 col-lg-8 col-xl-8">
-            <form class="review" action="/save" method="POST">
-                <div class="top mt-3">
-                    <img src="https://covers.openlibrary.org/b/id/<%= coverId %>-M.jpg" alt="Cover art of book">
-                    <div class="info">
-                        <input type="hidden" name="coverId" value="<%= locals.coverId %>">
-                        <p class="revForm mb-0">Title:</p>
-                        <p class="mb-0"><%= locals.title %></p>
-                        <input type="hidden" name="title" value="<%= locals.title %>">
-                        <p class="revForm mt-3 mb-0">Author:</p>
-                        <p class="mb-0"><%= locals.author %></p>
-                        <input type="hidden" name="author" value="<%= locals.author %>">
-                        <label for="date" class="mt-3 label revForm">Date Completed:</label>
-                        <input type="date" class="mt-2" name="date" min="1995-06-16" max=<%= max %> style="width: 52%">
-                        <label for="rating" class="mt-3 label revForm">Rating:</label>
-                        <div class="mt-2 rating">
-                            <input type="radio" name="rating" class="rating_button" id="new_rate_1" value="1">
-                                <label class="radio_stars" for="rate1">🖤</label>
-                            <input type="radio" name="rating" class="rating_button" id="new_rate_2" value="2">
-                                <label class="radio_stars" for="rate2">🖤</label>
-                            <input type="radio" name="rating" class="rating_button" id="new_rate_3" value="3">
-                                <label class="radio_stars" for="rate3">🖤</label>
-                            <input type="radio" name="rating" class="rating_button" id="new_rate_4" value="4">
-                                <label class="radio_stars" for="rate4">🖤</label>    
-                            <input type="radio" name="rating" class="rating_button" id="new_rate_5" value="5">
-                                <label class="radio_stars" for="rate5">🖤</label>
+            <% if (locals.update) { %>
+                <form class="review" action="/update" method="POST">
+                    <div class="top mt-3">
+                        <img src="https://covers.openlibrary.org/b/id/<%= update[0].coverid %>-M.jpg" alt="Cover art of book">
+                        <div class="info">
+                            <input type="hidden" name="coverId" value="<%= update[0].coverid %>">
+                            <p class="revForm mb-0">Title:</p>
+                            <p class="mb-0"><%= update[0].title %></p>
+                            <input type="hidden" name="title" value="<%= update[0].title %>">
+                            <p class="revForm mt-3 mb-0">Author:</p>
+                            <p class="mb-0"><%= update[0].author %></p>
+                            <input type="hidden" name="author" value="<%= update[0].author %>">
+                            <label for="date" class="mt-3 label revForm">Date Completed:</label>
+                            <input type="date" class="mt-2" name="date" min="1995-06-16" max=<%= max %> value=<%= update[0].date %> style="width: 52%">
+                            <label for="rating" class="mt-3 label revForm">Rating:</label>
+                            <p hidden id="rank"><%= update[0].rating %></p>
+                            <div class="mt-2 rating">
+                                <input type="radio" name="rating" value="1" id="rating-1">
+                                <label for="rating-1">🖤</label>
+                                <input type="radio" name="rating" value="2" id="rating-2">
+                                <label for="rating-2">🖤</label>
+                                <input type="radio" name="rating" value="3" id="rating-3">
+                                <label for="rating-3">🖤</label>
+                                <input type="radio" name="rating" value="4" id="rating-4">
+                                <label for="rating-4">🖤</label>
+                                <input type="radio" name="rating" value="5" id="rating-5">
+                                <label for="rating-5">🖤</label>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <hr class="mt-3 mb-0">
-                <label for="lname" class="mt-3 label revForm">Review:</label>
-                <textarea name="review" rows="10" class="mt-2"></textarea>
-                <button type="submit" class="rounded my-3">Submit</button>
-              </form>
+                    <hr class="mt-3 mb-0">
+                    <label for="lname" class="mt-3 label revForm">Review:</label>
+                    <textarea name="review" rows="10" class="mt-2"><%= update[0].review %></textarea>
+                    <input type="hidden" name="id" value=<%= update[0].id %>>
+                    <button type="submit" class="rounded my-3">Update</button>
+                </form>
+            <% } else { %>
+                <form class="review" action="/save" method="POST">
+                    <div class="top mt-3">
+                        <img src="https://covers.openlibrary.org/b/id/<%= coverId %>-M.jpg" alt="Cover art of book">
+                        <div class="info">
+                            <input type="hidden" name="coverId" value="<%= coverId %>">
+                            <p class="revForm mb-0">Title:</p>
+                            <p class="mb-0"><%= locals.title %></p>
+                            <input type="hidden" name="title" value="<%= locals.title %>">
+                            <p class="revForm mt-3 mb-0">Author:</p>
+                            <p class="mb-0"><%= locals.author %></p>
+                            <input type="hidden" name="author" value="<%= locals.author %>">
+                            <label for="date" class="mt-3 label revForm">Date Completed:</label>
+                            <input type="date" class="mt-2" name="date" min="1995-06-16" max=<%= max %> style="width: 52%">
+                            <label for="rating" class="mt-3 label revForm">Rating:</label>
+                            <div class="mt-2 rating">
+                                <!-- <input type="radio" name="rating" value="1" id="rating-1">
+                                <label for="rating-1">🖤</label>
+                                <input type="radio" name="rating" value="2" id="rating-2">
+                                <label for="rating-2">🖤</label>
+                                <input type="radio" name="rating" value="3" id="rating-3">
+                                <label for="rating-3">🖤</label>
+                                <input type="radio" name="rating" value="4" id="rating-4">
+                                <label for="rating-4">🖤</label>
+                                <input type="radio" name="rating" value="5" id="rating-5" checked>
+                                <label for="rating-5">🖤</label> -->
+                                <% for (let i = 1; i <= 5; i++) { %>
+                                    <% if (i == 5) { %>
+                                        <input type="radio" name="rating" value=<%= i %> id="rating-<%= i %>" checked>
+                                    <% } else { %>
+                                        <input type="radio" name="rating" value=<%= i %> id="rating-<%= i %>">
+                                    <% } %>
+                                    <label for="rating-<%= i %>">🖤</label>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="mt-3 mb-0">
+                    <label for="lname" class="mt-3 label revForm">Review:</label>
+                    <textarea name="review" rows="10" class="mt-2"></textarea>
+                    <button type="submit" class="rounded my-3">Submit</button>
+                </form>
+            <% } %>
         </div>
     </div>
 </div>
