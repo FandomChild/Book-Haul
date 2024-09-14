@@ -26,7 +26,6 @@ app.use(express.static("public"));
 async function retrieve(revId) {
     try {
         const result = await db.query("SELECT * FROM book JOIN review ON book.id = review.id WHERE book.id = ($1)", [revId]);
-        console.log(JSON.stringify(result.rows))
         return result.rows;
     } catch (error) {
         res.status(500).json({ message: "Error updating post" });
@@ -86,7 +85,7 @@ app.post("/save", async (req, res) => {
     console.log(data)
     if (!data.date) data.date = present;
     try {
-        db.query("BEGIN");
+        await db.query("BEGIN");
         await db.query("INSERT INTO book (title, author, coverId) VALUES ($1, $2, $3)", [data.title, data.author, data.coverId]);
         var result = await db.query("SELECT id FROM book WHERE title = $1", [data.title]);
         var id = result.rows[0].id;
@@ -95,8 +94,8 @@ app.post("/save", async (req, res) => {
 
         res.redirect("/");
     } catch (err) {
+        await db.query("ROLLBACK");
         console.log(err);
-        db.query("ROLLBACK");
     }
 });
 
@@ -119,6 +118,22 @@ app.post("/update", async (req, res) => {
     } catch (err) {
         console.log(err)
     }
+});
+
+app.get("/delete/:id", async (req, res) => {
+    var deli = req.params.id;
+    console.log("this is a test" + deli)
+    try {
+        await db.query("BEGIN");
+        await db.query("DELETE FROM review WHERE id = $1", [deli]);
+        await db.query("DELETE FROM book WHERE id = $1", [deli]);
+        db.query("COMMIT");
+        res.redirect("/")
+    } catch (err) {
+        await db.query("ROLLBACK");
+        console.log(err);
+    }
+    
 });
 
 app.get("/sources", (req, res) => {

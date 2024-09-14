@@ -15,26 +15,27 @@
             <div class="posts mb-3 col-6 col-sm-6 col-md-8 col-lg-8 col-xl-8">
               <div class="review">
                 <div class="top mt-3">
-                  <img src="https://covers.openlibrary.org/b/id/<%= data[i]['coverid'] %>-M.jpg" alt="Cover art of book">
+                  <img src="https://covers.openlibrary.org/b/id/<%= data[i].coverid %>-M.jpg" alt="Cover art of book">
                   <div class="info">
                       <p class="revForm mb-0">Title:</p>
-                      <p class="mb-0"><%= data[i]['title'] %></p>
+                      <p class="mb-0"><%= data[i].title %></p>
                       <p class="revForm mt-3 mb-0">Author:</p>
-                      <p class="mb-0"><%= data[i]['author'] %></p>
+                      <p class="mb-0"><%= data[i].author %></p>
                       <p class="revForm mt-3 mb-0">Date Completed</p>
-                      <p class="mb-0"><%= data[i]['date'] %></p>
+                      <p class="mb-0"><%= data[i].date %></p>
                       <p class="revForm mt-3 mb-0">Rating</p>
                       <% let rank = "🖤" %>
-                      <p><%= rank.repeat(data[i]['rating']) %></p>
+                      <p><%= rank.repeat(data[i].rating) %></p>
                   </div>
                 </div>
                 <hr class="mt-3 mb-0">
                 <p class="revForm mt-3 mb-0">Review:</p>
                 <p class="mt-0">
-                  <%= data[i]['review'] %>
+                  <%= data[i].review %>
                 </p>
                 <div class="mb-3">
-                  <a class="edit text-white text-decoration-none" href="/edit/<%= data[i]['id'] %>">Edit</a>
+                  <a class="text-decoration-none text-white" href="/edit/<%= data[i].id %>">Edit</a>
+                  <a class="text-decoration-none text-white" href="/delete/<%= data[i].id %>">Delete</a>
                 </div>
               </div>  
             </div>

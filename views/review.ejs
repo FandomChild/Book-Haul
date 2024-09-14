@@ -35,7 +35,7 @@
                     <label for="lname" class="mt-3 label revForm">Review:</label>
                     <textarea name="review" rows="10" class="mt-2"><%= update[0].review %></textarea>
                     <input type="hidden" name="id" value=<%= update[0].id %>>
-                    <button type="submit" class="rounded my-3">Update</button>
+                    <button type="submit" class="edit rounded my-3">Update</button>
                 </form>
             <% } else { %>
                 <form class="review" action="/save" method="POST">
