@@ -48,6 +48,7 @@ async function fetchData(searchTerm) {
         const data = await response.json();
         console.log('this is data', data);
         const result = data.docs;
+        console.log("this is result" + result)
         const title = result.map((book) => book.title);
         const author = result.map((book) => book.author_name ? book.author_name[0] : 'Unknown');
         const cover = result.map((book) => book.cover_i);        
@@ -111,8 +112,20 @@ async function updateDropdown(titles, coverIds, authorName, dropdown) {
 };
 
 const rank = document.getElementById('rank');
-var set = rank.innerHTML;
-const rating = document.getElementById(`rating-${set}`);
-rating.setAttribute("checked", '')
-console.log(rating.value)
-console.log(set)
+if (rank) {
+    var set = rank.innerHTML;
+    const rating = document.getElementById(`rating-${set}`);
+    rating.setAttribute("checked", '')
+    console.log(rating.value)
+    console.log(set)
+}
+
+const order = document.getElementById('sortOrder');
+if (order) {
+    console.log(order)
+    var change = order.innerHTML;
+    const sort = document.getElementById(`${change}s`);
+    sort.setAttribute("selected", '')
+    console.log(sort.value)
+    console.log(change)
+}

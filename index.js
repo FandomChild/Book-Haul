@@ -26,18 +26,21 @@ app.use(express.static("public"));
 async function retrieve(revId) {
     try {
         const result = await db.query("SELECT * FROM book JOIN review ON book.id = review.id WHERE book.id = ($1)", [revId]);
-        return result.rows;
+        return result.rows; 
     } catch (error) {
         res.status(500).json({ message: "Error updating post" });
     }
 }
 
 app.get("/", async (req, res) => {
+    console.log(order)
     try {
         const result = await db.query(`SELECT * FROM book JOIN review ON book.id = review.id ORDER BY ${order} DESC`);
         res.render("index.ejs", {
-            data: result.rows
+            data: result.rows,
+            sort: order
         });
+        order = "date";
     } catch(err) {
         console.log(err)
     }
@@ -134,10 +137,6 @@ app.get("/delete/:id", async (req, res) => {
         console.log(err);
     }
     
-});
-
-app.get("/sources", (req, res) => {
-    res.redirect("/");
 });
 
 app.listen(port, () => {
