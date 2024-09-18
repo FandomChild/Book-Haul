@@ -2,13 +2,16 @@ html, body {
     margin:0;
     padding:0;
     height:100%;
+    width: 100%;
+    padding: 0px;
+    overflow-x: hidden;
  }
  .container-flex {
     display: flex;
     min-height: 100vh!important;
+    width: 100%;
     margin:0;
     padding:0;
-    background-image: url('../photo/desk.png');
 }
 
 .space {
@@ -18,7 +21,7 @@ html, body {
 
 .sidebar {
     position: fixed;
-    width: 200px;
+    width: 205px;
     height: 100vh;
     background-color: #402218;
     display: flex;
@@ -26,7 +29,7 @@ html, body {
     justify-content: space-around;
     align-items: center;
     text-align: center;
-    flex: 1;
+    flex-shrink: 0;
 }
 
 .content {
@@ -34,7 +37,8 @@ html, body {
     align-items: center;
     flex-direction: column;
     gap: 20px;
-    flex: 3;
+    flex: 1;
+    background-image: url('../photo/desk.png');
 }
 
 .posts {
@@ -46,7 +50,7 @@ html, body {
     border-radius: 5px;
 }
 
-.bar input[type=text] {
+input[type=text] {
     margin-top: 5px;
     margin-bottom: 5px;
     border: none;
@@ -93,11 +97,6 @@ html, body {
     width: 100%;
     display: flex;
     justify-content: center; /* Center the dropdown list horizontally */
-}
-
-.searchbar {
-    display: flex;
-    justify-content: center;
 }
 
 .review {
@@ -177,4 +176,55 @@ p, button, .f1, a, input[type=text] {
     font-weight: 400;
     font-style: normal;
 }
-  
+
+.sortBar {
+    display: flex;
+}
+
+input[type=date] {
+    width: 52%;
+}
+
+@media (max-width: 768px) {
+    .posts, .review {
+        width: 200px;
+    }
+
+    .top, .bottom, .info, .listItem {
+        width: 100px;
+    }
+
+    .listItem {
+        padding: 0;
+        margin: 10px;
+    }
+
+    .review {
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .top {
+        flex-direction: column;
+    }
+
+    .alink {
+        margin: 3px;
+    }
+
+    input[type=text] {
+        width: 100px;
+    }
+
+    input[type=date] {
+        width: 100%;
+    }
+    ::placeholder {
+        font-size: 5pt;
+    }
+
+    .sidebar>p, h3 {
+        font-size: 8pt;
+    }
+}

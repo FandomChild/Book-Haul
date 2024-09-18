@@ -1,14 +1,14 @@
 <%- include("partials/header.ejs") %>
-    <div class="content pt-3">
-      <div class="posts searchBar mt-3">
-        <form class="bar col-9" action="/search" method="get">
+    <div class="content pt-3 ms-1">
+      <div class="posts mt-3 px-3">
+        <form action="/search" method="get">
             <input type="text" name="search" id="search" autocomplete="off" placeholder="Enter title, author, or ISBN">
             <div class="list">
                 <ul id="dropdown"></ul>
             </div>
         </form>
       </div>
-      <div>
+      <div class="sortBar">
           <form action="/sort" method="POST">
             <p hidden id="sortOrder"><%= locals.sort %></p>
             <select name="order">
@@ -21,7 +21,7 @@
       </div>
       <% if (locals.data) { %>
         <% for (let i = 0; i < data.length; i++) { %>
-            <div class="posts mb-3">
+            <div class="posts mb-3 p-3">
               <div class="review">
                 <div class="top mt-3">
                   <img src="https://covers.openlibrary.org/b/id/<%= data[i].coverid %>-M.jpg" alt="Cover art of book">
@@ -38,14 +38,16 @@
                       <p class="fst-italic">*Cover art is provided by <a class="bg-transparent text-decoration-none text-black fst-italic" href="https://openlibrary.org/dev/docs/api/covers">Open Library Covers API</a></p>
                   </div>
                 </div>
-                <hr class="mt-3 mb-0">
-                <p class="revForm mt-3 mb-0">Review:</p>
-                <p class="mt-0">
-                  <%= data[i].review %>
-                </p>
-                <div class="mb-3">
-                  <a class="alink text-decoration-none text-white" href="/edit/<%= data[i].id %>">Edit</a>
-                  <a class="alink text-decoration-none text-white" href="/delete/<%= data[i].id %>">Delete</a>
+                <div class="bottom">
+                  <hr class="mt-3 mb-0">
+                  <p class="revForm mt-3 mb-0">Review:</p>
+                  <p class="mt-0">
+                    <%= data[i].review %>
+                  </p>
+                  <div class="mb-3">
+                    <a class="alink text-decoration-none text-white" href="/edit/<%= data[i].id %>">Edit</a>
+                    <a class="alink text-decoration-none text-white" href="/delete/<%= data[i].id %>">Delete</a>
+                  </div>
                 </div>
               </div>  
             </div>
