@@ -1,13 +1,13 @@
 import bodyParser from "body-parser";
 import express from "express";
-import pg from "pg";
 import dotenv from 'dotenv';
+import pg from "pg";
 
 // need dotenv to use env file so personal db info can be hidden
 dotenv.config();
 const daba = process.env.database;
-const pw = process.env.password;
 const pt = process.env.port;
+const pw = process.env.password;
 
 const app = express();
 const port = 3000;
