@@ -1,6 +1,13 @@
 import bodyParser from "body-parser";
 import express from "express";
 import pg from "pg";
+import dotenv from 'dotenv';
+
+// need dotenv to use env file so personal db info can be hidden
+dotenv.config();
+const daba = process.env.database;
+const pw = process.env.password;
+const pt = process.env.port;
 
 const app = express();
 const port = 3000;
@@ -9,9 +16,9 @@ const port = 3000;
 const db = new pg.Client({
     user: "postgres",
     host: "localhost",
-    database: "library",
-    password: "Anaklusmos#13",
-    port: 5432,
+    database: daba,
+    password: pw,
+    port: pt,
 });
 db.connect();
 
