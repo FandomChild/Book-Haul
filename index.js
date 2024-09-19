@@ -4,6 +4,8 @@ import pg from "pg";
 
 const app = express();
 const port = 3000;
+
+// connect to pgadmin db
 const db = new pg.Client({
     user: "postgres",
     host: "localhost",
@@ -23,6 +25,7 @@ var order = 'date';
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+// create function to find book in tables if it already exists
 async function retrieve(revId) {
     try {
         const result = await db.query("SELECT * FROM book JOIN review ON book.id = review.id WHERE book.id = ($1)", [revId]);
@@ -32,8 +35,8 @@ async function retrieve(revId) {
     }
 }
 
+// get info from tables to display
 app.get("/", async (req, res) => {
-    console.log(order)
     try {
         const result = await db.query(`SELECT * FROM book JOIN review ON book.id = review.id ORDER BY ${order} DESC`);
         res.render("index.ejs", {
@@ -46,15 +49,15 @@ app.get("/", async (req, res) => {
     }
 });
 
+// take in order passed in from sort dropdown
 app.post("/sort", (req, res) => {
     order = req.body.order;
     res.redirect("/");
 });
 
-app.get("/search", (req, res) => {
-    res.render("search.ejs");
-});
-
+// get info passed in from book link
+// get the id from table if exists, if yes, pass id to retrieve function to pass in info from db
+// if book doesn't exist, pass info from book link to review page
 app.get("/review", async (req, res) => {
     var titleQ = req.query.title;
     var authorQ = req.query.author;
@@ -62,7 +65,7 @@ app.get("/review", async (req, res) => {
     console.log(titleQ, authorQ, coverIdQ);
 
     try {
-        const check = await db.query(`SELECT id FROM book WHERE title LIKE '%${titleQ}'`);
+        const check = await db.query("SELECT id FROM book WHERE title LIKE $1", [`'%${titleQ}%'`]);
         if (check.rows[0]) {
             var bk = check.rows[0].id;
             const result = await retrieve(bk);
@@ -75,7 +78,7 @@ app.get("/review", async (req, res) => {
                 title: titleQ,
                 author: authorQ,
                 coverId: coverIdQ,
-                max: present,
+                max: present
             });
         }
     } catch(err) {
@@ -83,6 +86,10 @@ app.get("/review", async (req, res) => {
     }
 });
 
+// get info from review page that was passed in
+// pass in present variable in case date is left empty
+// commense begin transaction so that both db tables can have info inserted at the same time, one can't happen without the other
+// after inserting into book table, get id from that new entry, pass in that id when inserting info into review page
 app.post("/save", async (req, res) => {
     const data = req.body;
     console.log(data)
@@ -102,8 +109,9 @@ app.post("/save", async (req, res) => {
     }
 });
 
+// get id from params, retrieve info post, pass in data to review page to edit
 app.get("/edit/:id", async (req, res) => {
-    var postId = req.params.id
+    var postId = req.params.id;
     const result = await retrieve(postId);
     res.render("review.ejs", {
         update: result,
@@ -111,21 +119,25 @@ app.get("/edit/:id", async (req, res) => {
     });
 });
 
+// retrieve updated info from edit/review page
+// pass in present variable in case date is left empty
+// update sql table
 app.post("/update", async (req, res) => {
     var edit = req.body;
     if (!edit.date) edit.date = present;
-    console.log(edit)
+    console.log(edit);
     try {
         await db.query("UPDATE review SET date = $1, rating = $2, review = $3 WHERE id = $4", [edit.date, edit.rating, edit.review, edit.id]);
-        res.redirect("/")
+        res.redirect("/");
     } catch (err) {
         console.log(err)
     }
 });
 
+// get review id from params
+// start another begin transaction so that the review info is deleted from both tables and not just one
 app.get("/delete/:id", async (req, res) => {
     var deli = req.params.id;
-    console.log("this is a test" + deli)
     try {
         await db.query("BEGIN");
         await db.query("DELETE FROM review WHERE id = $1", [deli]);

@@ -6,7 +6,19 @@ html, body {
     padding: 0px;
     overflow-x: hidden;
  }
- .container-flex {
+
+.alink {
+    display: inline-block;
+    background-color: #000;
+    padding: 10px;
+    font-size: 1em;
+    border: none;
+    border-radius: 4px;
+    width: 70px;
+    text-align: center;
+}
+
+.container-flex {
     display: flex;
     min-height: 100vh!important;
     width: 100%;
@@ -14,9 +26,85 @@ html, body {
     padding:0;
 }
 
-.space {
-    height: 100vh;
-    width: 200px;
+.content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+    background-image: url('../photo/desk.png');
+}
+
+.edit {
+    background-color: #000;
+    color: white;
+}
+
+.front {
+    border: 1px solid white;
+    width: 100%;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+}
+
+.list {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.listItem {
+    width: 420px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.listItem div {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.listItem img {
+    margin-right: 5px;
+}
+
+.listItem:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+.listItem p {
+    margin: 0;
+    display: inline;
+}
+
+.posts {
+    background-color: #F1D6AB;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border-radius: 5px;
+}
+
+.revForm {
+    font-weight: bold;
+}
+
+.review {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
 }
 
 .sidebar {
@@ -32,22 +120,53 @@ html, body {
     flex-shrink: 0;
 }
 
-.content {
+.sortBar {
     display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 20px;
-    flex: 1;
-    background-image: url('../photo/desk.png');
 }
 
-.posts {
-    background-color: #F1D6AB;
+.space {
+    height: 100vh;
+    width: 200px;
+}
+
+.top {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 20px;
+}
+
+#dropdown {
+    margin-bottom: 0;
+    padding: 0;
     align-items: center;
-    gap: 10px;
-    border-radius: 5px;
+}
+
+::placeholder {
+    text-align: center; 
+}
+
+a, button, .f1, input[type=text], p {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+button.sort {
+    border: 5px solid #F1D6AB;
+    background-color: #fff;
+    border-radius: 4px;
+    height: 40px;
+}
+
+h3, label, .revForm {
+    font-family: "Merriweather", serif;
+    font-weight: bold;
+    font-style: normal;
+}
+
+input[type=date] {
+    width: 52%;
 }
 
 input[type=text] {
@@ -58,139 +177,19 @@ input[type=text] {
     width: 600px;
     border-radius: 5px;
 }
-.listItem {
-    width: 420px;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-}
 
-.listItem img {
-    margin-right: 5px;
-}
-
-.listItem div {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-.listItem:hover {
-    background-color: #f1f1f1;
-    cursor: pointer;
-}
-#dropdown {
-    margin-bottom: 0;
-    padding: 0;
-    align-items: center;
-}
-
-.listItem p {
-    margin: 0;
-    display: inline;
-}
-
-.list {
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center; /* Center the dropdown list horizontally */
-}
-
-.review {
-    width: 600px;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-}
-
-.revForm {
-    font-weight: bold;
-}
-
-.coverDiv {
-    display: flex;
-    justify-content: center;
-}
-
-.top {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-}
-
-.info {
-    display: flex;
-    flex-direction: column;
-}
-
-::placeholder {
-    text-align: center; 
- }
-
- select {
+select {
     border: 5px solid #F1D6AB;
-    border-radius: 4px;;
-    height: 40px;
- }
-
-button.sort {
-    border: 5px solid #F1D6AB;
-    background-color: #fff;
     border-radius: 4px;
     height: 40px;
-}
-
-.alink {
-    display: inline-block;
-    background-color: #000;
-    padding: 10px;
-    font-size: 1em;
-    border: none;
-    border-radius: 4px;
-    width: 70px;
-    text-align: center;
-}
-
-.edit {
-    background-color: #000;
-    color: white;
-}
-
-.front {
-    border: 1px solid white;
-    width: 100%;
-}
-
-h3, label, .revForm {
-    font-family: "Merriweather", serif;
-    font-weight: bold;
-    font-style: normal;
-}
-
-p, button, .f1, a, input[type=text] {
-    font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-}
-
-.sortBar {
-    display: flex;
-}
-
-input[type=date] {
-    width: 52%;
 }
 
 @media (max-width: 768px) {
-    .posts, .review {
-        width: 200px;
+    .alink {
+        margin: 3px;
     }
 
-    .top, .bottom, .info, .listItem {
+    .bottom, .info, .listItem, .top {
         width: 100px;
     }
 
@@ -199,32 +198,33 @@ input[type=date] {
         margin: 10px;
     }
 
+    .posts, .review {
+        width: 200px;
+    }
+
     .review {
         text-align: center;
         justify-content: center;
         align-items: center;
     }
 
+    .sidebar>p, h3 {
+        font-size: 8pt;
+    }
+
     .top {
         flex-direction: column;
     }
 
-    .alink {
-        margin: 3px;
-    }
-
-    input[type=text] {
-        width: 100px;
-    }
-
-    input[type=date] {
-        width: 100%;
-    }
     ::placeholder {
         font-size: 5pt;
     }
-
-    .sidebar>p, h3 {
-        font-size: 8pt;
+    
+    input[type=date] {
+        width: 100%;
+    }
+    
+    input[type=text] {
+        width: 100px;
     }
 }
