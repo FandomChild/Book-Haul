@@ -1,3 +1,4 @@
+// lines 5-68 are taken from Obinnacode on udemy
 // do dom content loaded so html page loads before these functions are processed
 // use dom to get elements and set functions to handle the dropdown, getting info from library search api along with cover api then passing info
 
